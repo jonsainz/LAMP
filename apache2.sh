@@ -12,9 +12,13 @@ fi
 
 # Actualizamos el sistema
 
+echo -n "\n------------------------\nActualizando sistema...\n-----------------------\n"
+
 sudo apt update -y && sudo upgrade -y
 
 # Instalamos apache2
+
+echo -n "\n-----------------\nInstalando Apache\n-----------------\n"
 
 sudo apt install apache2 -y
 
