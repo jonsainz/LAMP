@@ -12,7 +12,7 @@ fi
 
 # Actualizamos el sistema
 
-echo -e "\n------------------------\nActualizando sistema...\n-----------------------\n"
+echo -e "\n-----------------------\nActualizando sistema...\n-----------------------\n"
 
 sudo apt update -y && sudo apt upgrade -y
 
@@ -30,7 +30,7 @@ echo -e "\n"
 read -p "Pulsa ENTER para continuar..."
 echo -e "\n"
 
-echo -e "\nConfigurando el firewall\n"
+echo -e "\n------------------------Configurando el firewall------------------------\n"
 
 sudo ufw allow 'apache' || sudo ufw allow 80/tcp
 sudo ufw reload
@@ -38,35 +38,37 @@ sudo ufw status
 
 echo -e "\n"
 read -p "Pulsa ENTER para continuar..."
+echo -e "\n"
 
 
 echo -e "\n-------------------------------------\nPreparando configuracion de Apache...\n--------------------------------------\n"
 
-sudo cp -r config/web.conf /etc/apache2/sites-available/
+sudo cp -r -v config/web.conf /etc/apache2/sites-available/
 
 echo -e "\n"
 read -p "Pulsa ENTER para continuar..."
 echo -e "\n"
 
 #Creando pagina web basica
+echo -e "\n-------------------------\nCreando pagina web basica\n------------------------\n"
 
-sudo mkdir /var/www/web/
-sudo mkdir /var/www/web/html
-
-echo -e "\n"
-read -p "Pulsa ENTER para continuar..."
-echo -e "\n"
-
-#ALGO A FALLADO AQUI PORQUE NO EXISTE EL ARCHIVO
-sudo cp -r config/index.html /var/www/web/html
+sudo mkdir -v /var/www/web/
+sudo mkdir -v /var/www/web/html
 
 echo -e "\n"
 read -p "Pulsa ENTER para continuar..."
 echo -e "\n"
 
-#Dando permisos al archivo de configuracion
-sudo chmod -R 755 /var/www/web/
-sudo chown -R www-data:www-data /var/www/web/
+sudo cp -r -v config/index.html /var/www/web/html
+
+echo -e "\n"
+read -p "Pulsa ENTER para continuar..."
+echo -e "\n"
+
+echo -e "\n-----------------------\nConfigurando pagina web\n-----------------------\n"
+
+sudo chmod -R -v 755 /var/www/web/
+sudo chown -R -v www-data:www-data /var/www/web/
 
 echo -e "\n"
 read -p "Pulsa ENTER para continuar..."
@@ -79,8 +81,8 @@ echo -e "\n"
 read -p "Pulsa ENTER para continuar..."
 echo -e "\n"
 
+echo -e "\n--------------------------------\nTest de configuracion de apache\n-------------------------------\n"
 sudo apachectl configtest
-#Esto quiero mostrarlo en pantalla
 
 echo -e "\n"
 read -p "Pulsa ENTER para continuar..."
@@ -88,6 +90,6 @@ echo -e "\n"
 
 sudo systemctl restart apache2
 
-echo -e "\nInstalacion y configuracion Acabada\n"
+echo -e "\n-----------------------------------\nInstalacion y configuracion Acabada\n-----------------------------------\n"
 sudo hostname -I
 echo -e "\nAbre tu navegador y escribe la IP mostrada: http://IP\n"
