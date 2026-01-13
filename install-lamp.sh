@@ -4,12 +4,92 @@
 
 # Comprobar si se ejecuta como root
 if [ "$EUID" -ne 0 ]; then
-  echo "Por favor ejecuta como root o con sudo"
+  echo -e "\nPor favor ejecuta como root o con sudo\n"
   exit 1
 fi
 
-# Ejecuta Script de instalacion y configuracion de Apache2
-sudo ./apache2.sh
+f [[ $EUID -ne 0 ]]; then
+
+        echo -e "\nPara ejecutar ese script de instalacion, hace falta tener permisos de Root.\n"
+        echo -e "\nEscribe: sudo ./apache2.sh\n"
+        exit 1
+fi
+
+# Actualizamos el sistema
+
+echo -e "\n--------------------\nActualizando sistema\n--------------------\n"
+
+sudo apt update -y && sudo apt upgrade -y
+
+echo -e "\n"
+read -p "Pulsa ENTER para continuar..."
+echo -e "\n"
+
+# Instalamos apache2
+
+echo -e "\n-----------------\nInstalando Apache\n-----------------\n"
+
+sudo apt install apache2 -y
+
+echo -e "\n"
+read -p "Pulsa ENTER para continuar..."
+echo -e "\n"
+
+echo -e "\n------------------------\nConfigurando el firewall\n------------------------\n"
+
+sudo ufw allow 'apache' || sudo ufw allow 80/tcp
+sudo ufw reload
+sudo ufw status
+
+echo -e "\n"
+read -p "Pulsa ENTER para continuar..."
+echo -e "\n"
+
+
+echo -e "\n----------------------------------\nPreparando configuracion de Apache\n----------------------------------\n"
+
+sudo cp -r -v config/web.conf /etc/apache2/sites-available/
+
+echo -e "\n"
+read -p "Pulsa ENTER para continuar..."
+echo -e "\n"
+
+#Creando pagina web basica
+echo -e "\n-------------------------\nCreando pagina web basica\n-------------------------\n"
+
+sudo mkdir -v /var/www/web/
+sudo mkdir -v /var/www/web/html
+
+echo -e "\n"
+
+sudo cp -r -v config/index.html /var/www/web/html
+
+echo -e "\n"
+read -p "Pulsa ENTER para continuar..."
+echo -e "\n"
+
+echo -e "\n-----------------------\nConfigurando pagina web\n-----------------------\n"
+
+sudo chmod -R -v 755 /var/www/web/
+sudo chown -R -v www-data:www-data /var/www/web/
+
+echo -e "\n"
+
+sudo a2ensite web.conf
+sudo a2dissite 000-default.conf
+echo -e "\n"
+read -p "Pulsa ENTER para continuar..."
+echo -e "\n"
+
+echo -e "\n-------------------------------\nTest de configuracion de apache\n-------------------------------\n"
+sudo apachectl configtest
+
+echo -e "\n"
+read -p "Pulsa ENTER para continuar..."
+echo -e "\n"
+
+sudo systemctl restart apache2
+
 
 # Instalando MariaDB. Es un Mysql gratuito que funciona igual.
 
