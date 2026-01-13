@@ -20,10 +20,13 @@ Script para la instalacion de LAMP (Linux+Apache2+MariaDB+PHP).
 3) Abre el navegador y prueba que todo este bien
 
 - Saber IP del oprdenador
-	hostname -I
+
+hostname -I
+
 - Abrir navegador dos ventanas
-	http://IP
-	httop://IP/info.php
+
+http://IP
+http://IP/info.php
 
 ### Consideraciones
 

@@ -139,5 +139,5 @@ sudo mv -v config/index.html /var/www/web/html/index.php
 
 echo -e "\nLAMP instalado correctamente!\n"
 hotname -I
-echo -e "\nPuedes comprobar tu web: http://IP y tu php: http://IP/info.php
-echo "No olvides ejecutar el script config/mariadb-pass.sh para cambiar la contraseña. por defecto: 123456"
+echo -e "\nPuedes comprobar tu web: http://IP y tu php: http://IP/info.php"
+echo -e "No olvides ejecutar el script config/mariadb-pass.sh para cambiar la contraseña. por defecto: 123456"
