@@ -93,10 +93,6 @@ sudo systemctl restart apache2
 
 # Instalando MariaDB. Es un Mysql gratuito que funciona igual.
 
-echo -e "\n"
-read -p "Pulsa ENTER para continuar..."
-echo -e "\n"
-
 echo -e "\n------------------\nInstalando MariaDB\n------------------\n"
 apt install mariadb-server mariadb-client -y
 systemctl enable mariadb
@@ -118,6 +114,7 @@ y
 y
 EOF
 
+echo -e "\n------------------------------------------------------\n"
 echo -e "\nLa contraseña de MariaDB se a establecido como: 123456\n"
 echo -e "\nCambia la contraseña despues de la instalacion con el script 'config/mariadb-pass.sh\n"
 

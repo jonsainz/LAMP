@@ -1,60 +1,31 @@
 # LAMP
 
-DESCRIPCION
+Script para la instalacion de LAMP (Linux+Apache2+MariaDB+PHP).
 
---
-
-## Organizacion
-
-
-1) instalar apache
-
-- Usar instalador apache2.sh
+- Instala Apache2 y configura y crea una web
+- Instala y configura MariaDB con un password 123456. En config/mariadb-pass.sh se puede camvbiar la contraseña
 
 
---
-
-- dentro de /etc/apache2/sites-available hay un archivo qeu es 000-default.conf. Copiarlo como archivo WEB.conf
-  Dentro de ese archivo web.conf configurar el archivo poniendo donde esta la web /var/www/WEB/html
-
-- Configurar bien el archivo web.conf:
-
-<VirtualHost *:80>
-    # 1. Identificación (Opcional si es local, pero buena práctica)
-    ServerName localhost (web: web.duckdns.org xejemplo=
-    ServerAdmin webmaster@localhost
-
-    # 2. Ruta de los archivos (Donde está tu index.html)
-    DocumentRoot /var/www/web/html
-
-    # 3. Permisos de acceso (Vital para evitar el error 403)
-    <Directory /var/www/web/html>
-        Options Indexes FollowSymLinks (Indexes: si no encuentra index.html te muestra lista, perfecto para el desarrollo pero no para cuando este lista// Fowwolsymlink: permite accesos directos a mi disco por si hay un enlace a algo en mi ordenador//)
-        AllowOverride All (lee las reglas del htaccess como contraseñas para careptas o re4direcciones)
-        Require all granted (Permite que todo el mundo vea pued aver el contenido de esta carpeta, sin esto da error)
-    </Directory>
-
-    # 4. Archivos de registro (Para saber qué falla)
-    ErrorLog ${APACHE_LOG_DIR}/error_web.log (guarda fallos)
-    CustomLog ${APACHE_LOG_DIR}/access_web.log combined (quien a entrado)
-</VirtualHost>
-
-- Activar sitio WEB:
-
-	sudo a2ensite WEB.conf
-	sudo a2dissite 000-default.conf
-	sudo systemctl restart apache2
-- Crear el archivo index.html para probar el http://localhost o http://IP (puedes sabrerla escibiendo: hostname -I)
-- Dar permisos a la nueva web:
-
-	sudo chmod -R 755 /var/www/WEB
-	sudo chown www-data:www-data /var/www/WEB/html/index.html
-	sudo chmod 644 /var/www/WEB/html/index.html
-
--  PROBAR
+## Intrucciones
 
 
+1) instala LAMP
 
+- Usar instalador install-lamp.sh
 
+2) Cambia contraseña MariaDB
 
-- Crear archivo info.php para probar el php y entrar: http://localhost/info.php
+- Usar script config/mariadb-pass.sh
+
+3) Abre el navegador y prueba que todo este bien
+
+- Saber IP del oprdenador
+	hostname -I
+- Abrir navegador dos ventanas
+	http://IP
+	httop://IP/info.php
+
+### Consideraciones
+
+Hay que tener en cuenta que antes de publicar nuestra web el archivo info.php hay que borrarlo.
+Esta bien tenerlo mientras creamos la web.
