@@ -85,7 +85,3 @@ read -p "Pulsa ENTER para continuar..."
 echo -e "\n"
 
 sudo systemctl restart apache2
-
-echo -e "\n-----------------------------------\nInstalacion y configuracion Acabada\n-----------------------------------\n"
-sudo hostname -I
-echo -e "\nAbre tu navegador y escribe la IP mostrada: http://IP\n"
