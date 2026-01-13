@@ -8,7 +8,7 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-f [[ $EUID -ne 0 ]]; then
+if [[ $EUID -ne 0 ]]; then
 
         echo -e "\nPara ejecutar ese script de instalacion, hace falta tener permisos de Root.\n"
         echo -e "\nEscribe: sudo ./apache2.sh\n"
