@@ -12,7 +12,7 @@ fi
 
 # Actualizamos el sistema
 
-echo -e "\n-----------------------\nActualizando sistema...\n-----------------------\n"
+echo -e "\n--------------------\nActualizando sistema\n--------------------\n"
 
 sudo apt update -y && sudo apt upgrade -y
 
@@ -22,7 +22,7 @@ echo -e "\n"
 
 # Instalamos apache2
 
-echo -e "\n--------------------\nInstalando Apache...\n--------------------\n"
+echo -e "\n-----------------\nInstalando Apache\n-----------------\n"
 
 sudo apt install apache2 -y
 
@@ -30,7 +30,7 @@ echo -e "\n"
 read -p "Pulsa ENTER para continuar..."
 echo -e "\n"
 
-echo -e "\n------------------------Configurando el firewall------------------------\n"
+echo -e "\n------------------------\nConfigurando el firewall\n------------------------\n"
 
 sudo ufw allow 'apache' || sudo ufw allow 80/tcp
 sudo ufw reload
@@ -41,7 +41,7 @@ read -p "Pulsa ENTER para continuar..."
 echo -e "\n"
 
 
-echo -e "\n-------------------------------------\nPreparando configuracion de Apache...\n--------------------------------------\n"
+echo -e "\n----------------------------------\nPreparando configuracion de Apache\n----------------------------------\n"
 
 sudo cp -r -v config/web.conf /etc/apache2/sites-available/
 
@@ -50,13 +50,11 @@ read -p "Pulsa ENTER para continuar..."
 echo -e "\n"
 
 #Creando pagina web basica
-echo -e "\n-------------------------\nCreando pagina web basica\n------------------------\n"
+echo -e "\n-------------------------\nCreando pagina web basica\n-------------------------\n"
 
 sudo mkdir -v /var/www/web/
 sudo mkdir -v /var/www/web/html
 
-echo -e "\n"
-read -p "Pulsa ENTER para continuar..."
 echo -e "\n"
 
 sudo cp -r -v config/index.html /var/www/web/html
@@ -71,8 +69,6 @@ sudo chmod -R -v 755 /var/www/web/
 sudo chown -R -v www-data:www-data /var/www/web/
 
 echo -e "\n"
-read -p "Pulsa ENTER para continuar..."
-echo -e "\n"
 
 sudo a2ensite web.conf
 sudo a2dissite 000-default.conf
@@ -81,7 +77,7 @@ echo -e "\n"
 read -p "Pulsa ENTER para continuar..."
 echo -e "\n"
 
-echo -e "\n--------------------------------\nTest de configuracion de apache\n-------------------------------\n"
+echo -e "\n-------------------------------\nTest de configuracion de apache\n-------------------------------\n"
 sudo apachectl configtest
 
 echo -e "\n"
