@@ -8,13 +8,6 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-if [[ $EUID -ne 0 ]]; then
-
-        echo -e "\nPara ejecutar ese script de instalacion, hace falta tener permisos de Root.\n"
-        echo -e "\nEscribe: sudo ./apache2.sh\n"
-        exit 1
-fi
-
 # Actualizamos el sistema
 
 echo -e "\n--------------------\nActualizando sistema\n--------------------\n"
@@ -132,12 +125,12 @@ echo -e "\n"
 echo -e "\nReiniciando Apache para aplicar cambios\n"
 systemctl restart apache2
 
-echo -e "\nCreando pagina index.php e info.php\n"
+echo -e "\n----------------------------------\nCreando pagina index.php e info.php\n-----------------------------------\n"
 sudo cp -r -v config/info.php /var/www/web/html
 sudo mv -v config/index.html /var/www/web/html/index.php
 
 
-echo -e "\nLAMP instalado correctamente!\n"
+echo -e "\n-----------------------------\nLAMP instalado correctamente!\n-----------------------------\n"
 hostname -I
 echo -e "\nPuedes comprobar tu web: http://IP y tu php: http://IP/info.php"
-echo -e "No olvides ejecutar el script config/mariadb-pass.sh para cambiar la contraseña. por defecto: 123456"
+echo -e "No olvides ejecutar el script mariadb-pass.sh para cambiar la contraseña. por defecto: 123456"
