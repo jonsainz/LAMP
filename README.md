@@ -15,7 +15,7 @@ Script para la instalacion de LAMP (Linux+Apache2+MariaDB+PHP).
 
 2) Cambia contraseña MariaDB
 
-- Usar script config/mariadb-pass.sh
+- Usar script mariadb-pass.sh
 
 3) Abre el navegador y prueba que todo este bien
 
