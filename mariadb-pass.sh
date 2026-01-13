@@ -17,3 +17,4 @@ echo -e "\nProbando acceso con la nueva contraseña:"
 # Intento de login automático para verificar
 mysql -u root -p"$password" -e "SELECT 'CONEXIÓN EXITOSA' AS Estado;"
 
+echo -e "\nPara entrar en MariaDB monitor ejecuta mariadb.sh\n"
